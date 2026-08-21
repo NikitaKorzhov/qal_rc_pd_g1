@@ -217,3 +217,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+.idea/material_theme_project_new.xml
+.idea/modules.xml
+.idea/qal_rc_pd_g1.iml
+.idea/workspace.xml
+.idea/vcs.xml
