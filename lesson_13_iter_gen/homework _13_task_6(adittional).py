@@ -1,9 +1,28 @@
 import random
 
+class Person:
+    def __init__(self, name: str):
+        self.name = name
+
+class Message:
+    def __init__(self, text: str):
+        self._text = text
+
+    @property
+    def text(self) -> str:
+        return self._text
+
+    def distort(self):
+        words = self._text.split()
+        if words:
+            rand_idx = random.randint(0, len(words) - 1)
+            words[rand_idx] = "???"
+            self._text = " ".join(words)
+
 class TelephoneChain:
-    def __init__(self, start_message: str, people: list[str]):
-        self.people = people.copy()
-        self.current_message = start_message
+    def __init__(self, start_message: str, names: list[str]):
+        self.people = [Person(name) for name in names]
+        self.message = Message(start_message)
         self.index = 0
 
     def __iter__(self):
@@ -14,20 +33,15 @@ class TelephoneChain:
             raise StopIteration
 
         current_person = self.people[self.index]
+        
+        if self.index > 0 and random.random() < 0.3:
+            self.message.distort()
+
         self.index += 1
-
-        if self.index > 1 and self.current_message:
-            if random.random() < 0.3:
-                words = self.current_message.split()
-                if words:
-                    rand_idx = random.randint(0, len(words) - 1)
-                    words[rand_idx] = "???"
-                    self.current_message = " ".join(words)
-
-        return (current_person, self.current_message)
+        return (current_person.name, self.message.text)
 
 
-people_list = ["Horpyna", "Paraska", "Yavdoha", "Oksana","Halyna","Ivanivna","Aryna"]
+people_list = ["Horpyna", "Paraska", "Yavdoha", "Oksana", "Halyna", "Ivanivna", "Aryna"]
 phone_game = TelephoneChain("The calf ran away from the shed and hid", people_list)
 
 for person, msg in phone_game:
