@@ -1,10 +1,16 @@
+class Person:
+    def __init__(self,name):
+        self.__name=name
+
+    def say_to(self,other_name):
+        return f"{self.__name} says {other_name}: pass it on!"
+
+    def tethered_calf(self):
+        return f"{self.__name} says: tethered the calf!"
+
 class ChainOfOrders:
     def __init__(self, names: list[str]):
-        self.__speaker = "Senior"
-        self.__continue_chain = ": pass it on!"
-        self.__end_chain = "says: tethered the calf!"
-
-        self.names = [self.__speaker] + names.copy()
+        self.names = ["Senior"] + names.copy()
 
     def __iter__(self):
         return self
@@ -13,13 +19,12 @@ class ChainOfOrders:
         if not self.names:
             raise StopIteration
 
-        speaker = self.names.pop(0)
+        speaker = Person(self.names.pop(0))
 
         if not self.names:
-            return f"{speaker} {self.__end_chain}"
+            return speaker.tethered_calf()
 
-        listener = self.names[0]
-        return f"{speaker} says {listener}{self.__continue_chain}"
+        return speaker.say_to(self.names[0])
 
 
 names = ["Mykhailo", "Petro", "Pavlo"]
