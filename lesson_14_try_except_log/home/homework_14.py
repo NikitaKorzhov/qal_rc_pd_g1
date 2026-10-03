@@ -1,3 +1,4 @@
+import re
 """
 Реалізувати функцію `sum_numbers_in_list(input_list)`, яка приймає список рядків, 
 де кожен рядок містить числа, розділені комами. Функція повинна повертати список 
@@ -14,17 +15,27 @@ sum_numbers_in_list("21")  # ValueError
 ```
 """
 
-
-def sum_numbers_in_list(string_list: list):
+def sum_numbers_in_list(input_list):
     """Повертає список сум чисел зі списку строк,
     які складаються з чисел, розділених комою."""
+
+    if not isinstance(input_list, list):
+        raise ValueError("Вхідні дані повинні бути списком")
+    if len(input_list) == 0:
+        raise ValueError("Список не може бути порожнім")
+        
     result = []
-    for item in string_list:
+    for item in input_list:
+        if not isinstance(item, str):
+            result.append("Не можу це зробити! AttributeError")
+            continue
+        
         try:
-            pass
-        except ValueError as e:
+            total = sum(int(part.strip()) for part in item.split(','))
+            result.append(total)
+        except (ValueError, TypeError):
             result.append("Не можу це зробити!")
-    
+            
     return result
 
 
