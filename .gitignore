@@ -217,6 +217,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+<<<<<<< HEAD
 .idea/workspace.xml
 .idea/vcs.xml
 .idea/modules.xml
@@ -229,3 +230,6 @@ __marimo__/
 .idea/vcs.xml
 .idea/vcs.xml
 .idea/workspace.xml
+=======
+.cache.sqlite
+>>>>>>> upstream/main
